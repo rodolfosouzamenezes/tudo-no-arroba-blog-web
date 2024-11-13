@@ -31,11 +31,10 @@ export default function InstagramLogin() {
         `${env.NEXT_PUBLIC_API_BASE_URL}/unauth/instagram/user/${userId}/code/${code}`,
       )
 
-      router.push(pathname + '?' + createQueryString('username', 'rodolfomszs'))
       router.push(
         pathname +
           '?' +
-          createQueryString('data', JSON.stringify(response.data.data)),
+          createQueryString('username', response.data.data.account.username),
       )
     } catch (error) {
       const status = error?.response?.status
