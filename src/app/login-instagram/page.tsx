@@ -25,18 +25,18 @@ export default function InstagramLogin() {
 
   const handleInstagramLogin = async () => {
     try {
-      // const userId = JSON.parse(state)?.userId
+      const userId = JSON.parse(state)?.userId
 
-      // const response = await axios.get(
-      //   `${env.NEXT_PUBLIC_API_BASE_URL}/unauth/instagram/user/${userId}/code/${code}`,
-      // )
+      const response = await axios.get(
+        `${env.NEXT_PUBLIC_API_BASE_URL}/unauth/instagram/user/${userId}/code/${code}`,
+      )
 
       router.push(pathname + '?' + createQueryString('username', 'rodolfomszs'))
-      // router.push(
-      //   pathname +
-      //     '?' +
-      //     createQueryString('data', JSON.stringify(response.data.data)),
-      // )
+      router.push(
+        pathname +
+          '?' +
+          createQueryString('data', JSON.stringify(response.data.data)),
+      )
     } catch (error) {
       const status = error?.response?.status
       if (status === 409) return router.replace('/login-instagram/conta-em-uso')
