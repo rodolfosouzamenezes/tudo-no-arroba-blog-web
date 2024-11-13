@@ -22,7 +22,9 @@ export default function InstagramLogin() {
 
       console.log(response.data.data)
 
-      router.replace(`/login-instagram/sucesso?username=rodolfomszs`)
+      router.replace(
+        `/login-instagram/sucesso?username=rodolfomszs&data=${response.data.data}`,
+      )
 
       console.log(response.data)
     } catch (error) {
