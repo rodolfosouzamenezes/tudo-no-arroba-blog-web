@@ -24,9 +24,7 @@ export default function RootLayout({ children }: WithChildren) {
       >
         <Providers>
           <div className="relative flex h-screen max-h-screen justify-center overflow-hidden bg-white dark:bg-zinc-800">
-            <div className="mt-16 flex h-[calc(100vh_-_64px)] w-full justify-center overflow-y-scroll">
-              <main className="w-full">{children}</main>
-            </div>
+            {children}
           </div>
 
           <ToastContainer
