@@ -4,6 +4,7 @@ import { useCallback, useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import axios from 'axios'
 import { env } from '@/utils/env'
+import { ScatterBoxLoader } from 'react-awesome-loaders'
 
 export default function InstagramLogin() {
   const searchParams = useSearchParams()
@@ -51,8 +52,8 @@ export default function InstagramLogin() {
   }, [])
 
   return (
-    <div className="flex h-full flex-1 items-center justify-center">
-      Carregando...
+    <div className="flex h-full flex-1 items-center justify-center bg-white">
+      <ScatterBoxLoader primaryColor={'#3b82f6'} background={'#fff'} />
     </div>
   )
 }
