@@ -1,32 +1,42 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import axios from 'axios'
 import { env } from '@/utils/env'
 
 export default function InstagramLogin() {
-  const router = useRouter()
   const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
 
   const code = searchParams.get('code')
   const state = searchParams.get('state')
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams],
+  )
+
   const handleInstagramLogin = async () => {
     try {
-      const userId = JSON.parse(state)?.userId
+      // const userId = JSON.parse(state)?.userId
 
-      const response = await axios.get(
-        `${env.NEXT_PUBLIC_API_BASE_URL}/unauth/instagram/user/${userId}/code/${code}`,
-      )
+      // const response = await axios.get(
+      //   `${env.NEXT_PUBLIC_API_BASE_URL}/unauth/instagram/user/${userId}/code/${code}`,
+      // )
 
-      console.log(response.data.data)
-
-      router.replace(
-        `/login-instagram/sucesso?username=rodolfomszs&data=${response.data.data}`,
-      )
-
-      console.log(response.data)
+      router.push(pathname + '?' + createQueryString('username', 'rodolfomszs'))
+      // router.push(
+      //   pathname +
+      //     '?' +
+      //     createQueryString('data', JSON.stringify(response.data.data)),
+      // )
     } catch (error) {
       const status = error?.response?.status
       if (status === 409) return router.replace('/login-instagram/conta-em-uso')
