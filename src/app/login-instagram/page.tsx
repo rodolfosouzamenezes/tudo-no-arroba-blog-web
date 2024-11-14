@@ -4,7 +4,8 @@ import { useCallback, useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import axios from 'axios'
 import { env } from '@/utils/env'
-import { ScatterBoxLoader } from 'react-awesome-loaders'
+import Lottie from 'react-lottie'
+import * as animationData from '@/assets/loading-animation.json'
 
 export default function InstagramLogin() {
   const searchParams = useSearchParams()
@@ -39,11 +40,11 @@ export default function InstagramLogin() {
       )
     } catch (error) {
       const status = error?.response?.status
+      console.error(error)
+
       if (status === 409) return router.replace('/login-instagram/conta-em-uso')
 
       router.replace('/login-instagram/erro')
-
-      console.error(error)
     }
   }
 
@@ -53,7 +54,18 @@ export default function InstagramLogin() {
 
   return (
     <div className="flex h-full flex-1 items-center justify-center bg-white">
-      <ScatterBoxLoader primaryColor={'#3b82f6'} background={'#fff'} />
+      <Lottie
+        options={{
+          loop: true,
+          autoplay: true,
+          animationData,
+          rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+          },
+        }}
+        height={300}
+        width={300}
+      />
     </div>
   )
 }

@@ -50,6 +50,7 @@
     "react-dom": "^18",
     "react-easy-crop": "^5.0.7",
     "react-hook-form": "^7.51.4",
+    "react-lottie": "^1.2.4",
     "react-quill": "^2.0.0",
     "react-sketch-canvas": "^6.2.0",
     "react-spinners": "^0.13.8",
